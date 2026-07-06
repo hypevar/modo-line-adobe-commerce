@@ -1,0 +1,65 @@
+<?php
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+
+/** @var \Line\Modo\Block\Payment\View\Payment $block */
+/** @var \Laminas\Escaper\EscaperInterface $escaper */
+$paymentData = $block->getLinePaymentInfo();
+$frameUrl = $escaper->escapeUrl($block->getFrameUrl() . '/line-checkout-loader.js');
+$pk = $block->getPublikKey();
+$mobileCallbackUrl = $block->getMobileCallbackUrl();
+$themeData = $block->getThemeData();
+$primaryColor = $escaper->escapeHtmlAttr($themeData['data-primary-color'] ?? '#008859');
+?>
+<?php if($block->isLineModoPaymentMethod()) : ?>
+    <style>
+        .line-modo-status-message { border-color: <?= $primaryColor ?>; }
+    </style>
+    <div id="line-checkout-wrapper" class="line-modo-checkout-wrapper">
+        <div id="line-checkout"></div>
+
+        <div id="line-modo-status-message" class="line-modo-status-message" style="display:none;">
+            <div class="line-modo-status-content">
+                <span class="line-modo-status-icon"></span>
+                <p class="line-modo-status-text"></p>
+                <div class="line-modo-status-actions">
+                    <a id="line-modo-retry-btn"
+                       href="<?= $escaper->escapeUrl($block->getRetryUrl()) ?>"
+                       class="action primary line-modo-retry-btn">
+                        <span><?= $escaper->escapeHtml(__('Try again')) ?></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script
+        src="<?= $frameUrl ?>"
+        data-public-key="<?= $pk ?>"
+        data-payment-id="<?= $paymentData['id'] ?>"
+        data-container="line-checkout",
+        data-callback-url-success="<?= $mobileCallbackUrl?>",
+        data-callback-url-failure="<?= $mobileCallbackUrl?>",
+        <?php foreach ($themeData as $attr => $value): ?>
+            <?= $escaper->escapeHtmlAttr($attr) ?>="<?= $escaper->escapeHtmlAttr($value) ?>"
+        <?php endforeach; ?>>
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "lineEventListener": {
+                    "successUrl": "<?= $escaper->escapeUrl($block->getUrl('checkout/onepage/success')) ?>",
+                    "failureUrl": "<?= $escaper->escapeUrl($block->getUrl('checkout/onepage/failure')) ?>",
+                    "retryUrl": "<?= $escaper->escapeUrl($block->getRetryUrl()) ?>",
+                    "statusUrl": "<?= $escaper->escapeUrl($block->getStatusUrl()) ?>",
+                    "lineOrigin": "<?= $escaper->escapeHtml($block->getFrameUrl()) ?>"
+                }
+            }
+        }
+    </script>
+
+<?php endif; ?>

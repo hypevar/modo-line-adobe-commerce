@@ -1,0 +1,144 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="line_modo" showInWebsite="1" showInStore="1" showInDefault="1"
+                   translate="label">
+                <label>Line Modo</label>
+                <field id="active" type="select" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="environment" type="select" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>Environment</label>
+                    <source_model>Line\Modo\Model\Config\Source\Environment</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="sandbox_endpoint" type="text" showInWebsite="1" showInStore="1" showInDefault="1"
+                    translate="label">
+                    <label>Sandbox Endpoint</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                        <field id="*/*/environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="sandbox_frame_endpoint" type="text" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label">
+                    <label>Sandbox Frame Endpoint</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                        <field id="*/*/environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="production_endpoint" type="text" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label">
+                    <label>Production Endpoint</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                        <field id="*/*/environment">production</field>
+                    </depends>
+                </field>
+                <field id="production_frame_endpoint" type="text" showInWebsite="1" showInStore="1" showInDefault="1"
+                       translate="label">
+                    <label>Production Frame Endpoint</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                        <field id="*/*/environment">production</field>
+                    </depends>
+                </field>
+                <include path="Line_Modo::system/credentials.xml"/>
+                <include path="Line_Modo::system/notifications.xml"/>
+                <include path="Line_Modo::system/theme.xml"/>
+                <field id="title" type="text" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Title</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="cc_code" type="text" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>CC Code</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="order_status" type="select" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>New Order Status</label>
+                    <source_model>Line\Modo\Model\Config\Source\Order\Status\PendingPayment</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="status_pay" type="select" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>Payment has been accepted</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="generate_invoice" type="select" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label comment">
+                    <label>Generate Invoice on Payment</label>
+                    <comment>Requires Magento automatic invoicing to also be enabled. Applied when a SUCCESS webhook is received.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="status_rejected" type="select" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>Payment has been rejected</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="allowspecific" type="allowspecific" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="specificcountry" type="multiselect" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="sort_order" type="text" showInWebsite="1" showInStore="1"
+                       showInDefault="1" translate="label">
+                    <label>Sort Order</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="debug" type="select" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <line_modo>
+                <active>0</active>
+                <environment>sandbox</environment>
+                <sandbox_endpoint>https://staging.api.checkout.line.net.ar</sandbox_endpoint>
+                <sandbox_frame_endpoint>https://staging.checkout.line.net.ar</sandbox_frame_endpoint>
+                <production_endpoint>https://api.checkout.line.net.ar</production_endpoint>
+                <production_frame_endpoint>https://checkout.line.net.ar</production_frame_endpoint>
+                <order_status>pending_payment</order_status>
+                <title>Line - Modo</title>
+                <redirect>0</redirect>
+                <allowspecific>1</allowspecific>
+                <specificcountry>AR</specificcountry>
+                <group>offline</group>
+                <status_pay>processing</status_pay>
+                <generate_invoice>0</generate_invoice>
+                <can_order>false</can_order>
+                <can_authorize>false</can_authorize>
+                <notifications>
+                    <email_enabled>total</email_enabled>
+                    <email_notification_template>payment_other_line_modo_notifications_email_notification_template</email_notification_template>
+                </notifications>
+                <production_credentials>
+                    <pub_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                    <secret_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                </production_credentials>
+                <sandbox_credentials>
+                    <pub_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                    <secret_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                </sandbox_credentials>
+                <!-- Internal configs -->
+                <model>Line\Modo\Model\Payment\Modo</model>
+                <is_gateway>false</is_gateway>
+                <can_use_checkout>true</can_use_checkout>
+                <can_use_internal>true</can_use_internal>
+                <is_offline>true</is_offline>
+                <order_place_redirect_url>line/modo/start</order_place_redirect_url>
+                <theme>
+                    <primary_color>#008859</primary_color>
+                    <background_color></background_color>
+                    <text_color>#1f2937</text_color>
+                    <border_color></border_color>
+                    <font_family>system-ui, sans-serif</font_family>
+                    <font_size>16</font_size>
+                    <border_radius>12</border_radius>
+                    <button_border_radius>100</button_border_radius>
+                    <button_text_color>#ffffff</button_text_color>
+                    <button_hover_color>#006d47</button_hover_color>
+                </theme>
+            </line_modo>
+        </payment>
+    </default>
+</config>

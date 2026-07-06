@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="theme" showInDefault="1" showInWebsite="1" showInStore="1" translate="label" sortOrder="90">
+        <label>Checkout Widget Theme</label>
+        <depends>
+            <field id="*/*/active">1</field>
+        </depends>
+        <field id="primary_color" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Primary Color</label>
+            <comment>Hex color for main button. Default: #008859</comment>
+        </field>
+        <field id="background_color" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Background Color</label>
+            <comment>Widget background. Default: transparent</comment>
+        </field>
+        <field id="text_color" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Text Color</label>
+            <comment>Default: #1f2937</comment>
+        </field>
+        <field id="border_color" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Border Color</label>
+            <comment>Default: #e5e7eb</comment>
+        </field>
+        <field id="font_family" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Font Family</label>
+            <comment>Default: system-ui, sans-serif</comment>
+        </field>
+        <field id="font_size" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Font Size (px)</label>
+            <comment>Base font size in pixels. Default: 16</comment>
+        </field>
+        <field id="border_radius" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Border Radius (px)</label>
+            <comment>Container roundness in pixels. Default: 12</comment>
+        </field>
+        <field id="button_border_radius" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Button Border Radius (px)</label>
+            <comment>Button roundness in pixels. Default: 100</comment>
+        </field>
+        <field id="button_text_color" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Button Text Color</label>
+            <comment>Default: #ffffff</comment>
+        </field>
+        <field id="button_hover_color" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+            <label>Button Hover Color</label>
+            <comment>Default: #006d47</comment>
+        </field>
+    </group>
+</include>

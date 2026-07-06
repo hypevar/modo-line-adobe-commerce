@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Line_Promotions
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="line_promotions" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="501" translate="label">
+                <label>Line Promotions</label>
+                <field id="enabled" type="select" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" type="obscure" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                    <label>API Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="endpoint" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                    <label>Endpoint</label>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="merchant" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                    <label>Merchant</label>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="merchant_id" type="text" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                    <label>Merchant ID</label>
+                    <depends>
+                        <field id="*/*/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

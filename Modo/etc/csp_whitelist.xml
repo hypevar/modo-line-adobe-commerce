@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="frame-src">
+            <values>
+                <value id="line-checkout" type="host">checkout.line.net.ar</value>
+                <value id="staging-line-checkout" type="host">staging.checkout.line.net.ar</value>
+            </values>
+        </policy>
+        <policy id="script-src">
+            <values>
+                <value id="line-checkout-script" type="host">staging.checkout.line.net.ar</value>
+                <value id="line-checkout-script-prod" type="host">checkout.line.net.ar</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="line_api" type="host">https://checkout.line.net.ar</value>
+                <value id="staging_line_api" type="host">https://staging.checkout.line.net.ar</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Line\Modo\Api\ApiClientInterface"
+                type="Line\Modo\Model\ApiClient"/>
+    <preference for="Line\Modo\Api\ConfigInterface"
+                type="Line\Modo\Config\Config"/>
+    <preference for="Line\Modo\Api\PaymentProcessorInterface"
+                type="Line\Modo\Processor\PaymentProcessor"/>
+    <preference for="Line\Modo\Api\Data\PaymentProcessorResponseInterface"
+                type="Line\Modo\Model\PaymentProcessorResponse"/>
+    <preference for="Line\Modo\Api\NotificationSenderInterface"
+                type="Line\Modo\Model\NotificationSender"/>
+
+    <virtualType name="Line\Modo\Model\Payment\Modo" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">Line\Modo\Api\ConfigInterface::PAYMENT_CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Line\Modo\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Line\Modo\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">LineModoValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">LineModoCommandPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="LineModoValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">LineModoConfigValueHandler</item>
+                <item name="order_place_redirect_url" xsi:type="string">LineModoConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="LineModoConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">LineModoGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="LineModoGatewayConfig" type="Line\Modo\Config\Config">
+    </virtualType>
+    <type name="Line\Modo\Config\Config">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">Magento\Payment\Gateway\Config\ConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Controller\Modo\Callback">
+        <arguments>
+            <argument name="paymentProcessor"
+                      xsi:type="object">Line\Modo\Processor\PaymentProcessorPool
+            </argument>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Processor\PaymentProcessorPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="object">Line\Modo\Processor\PaymentProcessor</item>
+                <item name="status" xsi:type="object">Line\Modo\Processor\StatusProcessor</item>
+                <item name="notification" xsi:type="object">Line\Modo\Processor\NotificationProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="LineModoCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array"/>
+        </arguments>
+    </virtualType>
+
+    <!-- Custom log file (/var/log/line_modo.log) -->
+    <virtualType name="Line\Modo\Logger\LineModoLoggerHandler"
+                 type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/line_modo.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="LineModoLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="info" xsi:type="object">Line\Modo\Logger\LineModoLoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Line\Modo\Controller\Modo\Redirect">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Controller\Modo\Start">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Model\ApiClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Model\NotificationSender">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Model\Order\Email\Sender\InstructionSender">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Observer\CreateStoreOnSave">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Processor\StatusProcessor">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+    <type name="Line\Modo\Controller\Modo\Webhook">
+        <arguments>
+            <argument name="logger" xsi:type="object">LineModoLogger</argument>
+        </arguments>
+    </type>
+</config>

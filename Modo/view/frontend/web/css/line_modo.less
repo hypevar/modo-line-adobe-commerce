@@ -1,0 +1,442 @@
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+@line-primary-color: #002c53;
+@line-success-color: #004921;
+@line-success-background-color: #e6f4ea;
+@line-warning-color: #eab308;
+@line-warning-background-color: #fff9e6;
+@line-incomplete-color: #f59e0b;
+@line-incomplete-background-color: #fef3c7;
+@line-waiting-color: #62b4f7;
+@line-waiting-background-color: #deeffd;
+@line-border-color: #dddddd;
+@line-text-color: #333333;
+@line-background-light: #f5f5f5;
+@line-border-radius: 10px;
+@line-padding-standard: 20px;
+@line-padding-small: 10px;
+@line-margin-standard: 20px;
+@line-margin-small: 10px;
+@line-margin-tiny: 5px;
+
+// Main container
+.line-modo {
+    &.payment-instructions {
+        margin-bottom: 1em;
+    }
+
+    // Payment status styles
+    .payment-status {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: @line-margin-standard;
+        border-radius: @line-border-radius;
+        padding: @line-padding-standard;
+
+        &.waiting {
+            border: 1px solid @line-waiting-color;
+            background: @line-waiting-background-color;
+        }
+
+        &.incomplete {
+            border: 1px solid @line-incomplete-color;
+            background: @line-incomplete-background-color;
+        }
+
+        &.success {
+            border: 1px solid @line-success-color;
+            background: @line-success-background-color;
+        }
+
+        .payment-status-icon {
+            margin-right: @line-margin-small;
+
+            &.incomplete {
+                width: 22px;
+                height: 17px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24' fill='none'><path d='M21.7304 18.0002L13.7304 4.00022C13.556 3.69243 13.303 3.43641 12.9973 3.25829C12.6917 3.08017 12.3442 2.98633 11.9904 2.98633C11.6366 2.98633 11.2892 3.08017 10.9835 3.25829C10.6778 3.43641 10.4249 3.69243 10.2504 4.00022L2.25042 18.0002C2.0741 18.3056 1.98165 18.6521 1.98243 19.0047C1.98321 19.3573 2.0772 19.7035 2.25486 20.008C2.43253 20.3126 2.68757 20.5648 2.99411 20.7391C3.30066 20.9133 3.64783 21.0034 4.00042 21.0002H20.0004C20.3513 20.9999 20.6959 20.9072 20.9997 20.7315C21.3035 20.5558 21.5556 20.3033 21.7309 19.9993C21.9062 19.6954 21.9985 19.3506 21.9984 18.9997C21.9983 18.6488 21.9059 18.3041 21.7304 18.0002Z' stroke='%23530001' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M12 9V13' stroke='%23530001' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M12 17H12.01' stroke='%23530001' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            }
+
+            &.waiting {
+                width: 20px;
+                height: 20px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='%23002C53' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M12 16V12' stroke='%23002C53' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M12 8H12.01' stroke='%23002C53' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            }
+
+            &.success {
+                width: 20px;
+                height: 20px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' stroke='%23004921' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+            }
+        }
+
+        .status-text {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .status-message-title {
+            font-weight: bold;
+            font-size: 14px;
+
+            .waiting & {
+                color: @line-primary-color;
+            }
+
+            .incomplete & {
+                color: @line-text-color;
+            }
+
+            .success & {
+                color: @line-success-color;
+            }
+        }
+
+        .status-message-description {
+            margin-top: @line-margin-tiny;
+            font-weight: 250;
+            font-size: 13px;
+        }
+    }
+
+    // Payment status message
+    .payment-status-message {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    // Payment warning
+    .payment-warning {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: @line-margin-standard;
+        border-radius: @line-border-radius;
+        padding: @line-padding-standard;
+        border: 1px solid @line-warning-color;
+        background: @line-warning-background-color;
+
+        &-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: @line-margin-small;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'><path d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='%23eab308' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M12 16V12' stroke='%23eab308' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M12 8H12.01' stroke='%23eab308' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+        }
+
+        &-message {
+           flex: 1;
+        }
+
+        .status-message-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #57191a;
+        }
+
+        .status-message-description {
+            margin-top: @line-margin-tiny;
+            font-weight: 250;
+            font-size: 13px;
+            color: @line-text-color;
+
+            strong {
+                color: @line-text-color;
+            }
+        }
+    }
+
+    // Payment info
+    .payment-info {
+        border: 1px solid @line-border-color;
+        border-radius: @line-border-radius;
+        padding: @line-padding-standard;
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+    }
+
+    .payment-title {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 26px;
+        color: @line-text-color;
+    }
+
+    .payment-description {
+        margin-bottom: @line-margin-standard;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 23px;
+        letter-spacing: 0.17px;
+        color: @line-text-color;
+    }
+
+    // Payment containers
+    .payment-amount-container,
+    .payment-alias-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .payment-alias-label,
+    .payment-amount-label {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: @line-margin-small;
+        margin-bottom: @line-margin-tiny;
+        color: @line-text-color;
+    }
+
+    .payment-alias,
+    .payment-amount {
+        display: flex;
+        font-size: 14px;
+        margin-bottom: @line-margin-small;
+        border: 1px solid @line-border-color;
+        border-radius: @line-border-radius;
+        padding: @line-padding-small;
+        background: @line-background-light;
+        width: 80%;
+        color: @line-text-color;
+    }
+
+    // Copy button
+    .copy-button {
+        font-size: 12px;
+        padding: 5px @line-padding-small;
+        margin-bottom: @line-margin-small;
+        margin-left: @line-margin-tiny;
+        background-color: @line-primary-color;
+        border: 1px solid @line-primary-color;
+        border-radius: @line-border-radius;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        color: #ffffff;
+
+        &:hover {
+            background-color: @line-primary-color;
+        }
+
+        span {
+            position: absolute;
+            border-radius: 50%;
+            background-color: @line-primary-color;
+            width: 100px;
+            height: 100px;
+            margin-top: -50px;
+            margin-left: -50px;
+            animation: ripple 1s;
+            opacity: 0;
+        }
+    }
+
+    // Tooltips
+    .line-cvu-alias-tooltip,
+    .line-cvu-amount-tooltip {
+        position: absolute;
+        transform: translateY(-125%);
+        background-color: @line-primary-color;
+        border-radius: @line-border-radius;
+        color: #ffffff;
+        font-size: 10px;
+        padding: 8px;
+        letter-spacing: 0.2px;
+        margin-left: @line-margin-tiny;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+        visibility: hidden;
+        opacity: 0;
+
+        &::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: @line-primary-color transparent transparent transparent;
+        }
+
+        &.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    // Container for CVUs
+    .container-line-cvus {
+        position: relative;
+        display: flex;
+    }
+
+    // Bank info
+    .payment-bank-info {
+        font-size: 14px;
+        margin-top: @line-margin-small;
+        display: flex;
+        flex-direction: column;
+        color: @line-text-color;
+    }
+
+    // Spinner
+    .line-spinner {
+        border: 3px solid @line-primary-color;
+        border-radius: 50%;
+        border-top: 3px solid @line-primary-color;
+        width: 15px;
+        height: 15px;
+        animation: spin 1s linear infinite;
+    margin: 20px auto;
+    }
+
+    // Animations
+    @keyframes ripple {
+        from {
+            opacity: 1;
+            transform: scale(0);
+        }
+        to {
+            opacity: 0;
+            transform: scale(10);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Ensure no conflicts with other page elements */
+    .line-payment-container * {
+        box-sizing: border-box;
+    }
+
+    /* Styling for top-positioned payment interface */
+    .line-payment-wrapper {
+        width: 100%;
+        max-width: none;
+        clear: both;
+    }
+
+    .line-payment-section {
+        box-shadow: 0 2px 8px @line-primary-color;
+        background: #ffffff;
+        border: 1px solid @line-border-color;
+    }
+}
+
+// Checkout QR wrapper
+.line-modo-checkout-wrapper {
+    position: relative;
+}
+
+// Success overlay: covers the checkout container
+.line-modo-success-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background: @line-success-background-color;
+    border: 1px solid @line-success-color;
+    border-radius: @line-border-radius;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+
+    .line-modo-success-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: @line-padding-standard;
+        text-align: center;
+    }
+
+    .line-modo-success-icon {
+        font-size: 48px;
+        margin-bottom: @line-margin-small;
+    }
+
+    .line-modo-success-text {
+        font-size: 16px;
+        font-weight: 700;
+        color: @line-success-color;
+    }
+}
+
+// Status/error message box
+.line-modo-status-message {
+    display: none;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    background: transparent;
+    border: 1px solid;
+
+    .line-modo-status-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: @line-margin-small;
+    }
+
+    .line-modo-status-icon {
+        font-size: 24px;
+    }
+
+    .line-modo-status-text {
+        font-size: 14px;
+        color: @line-text-color;
+        margin: 0;
+    }
+
+    .line-modo-status-actions {
+        display: flex;
+        gap: @line-margin-small;
+        flex-wrap: wrap;
+        margin-top: @line-margin-small;
+    }
+
+    .line-modo-retry-btn,
+    .line-modo-home-btn {
+        display: inline-block;
+        padding: 8px @line-padding-standard;
+        border-radius: @line-border-radius;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .line-modo-retry-btn {
+        background: @line-primary-color;
+        color: #ffffff;
+        border: 1px solid @line-primary-color;
+
+        &:hover {
+            opacity: .88;
+        }
+    }
+
+    .line-modo-home-btn {
+        background: transparent;
+        color: @line-primary-color;
+        border: 1px solid @line-primary-color;
+
+        &:hover {
+            background: @line-background-light;
+        }
+    }
+}

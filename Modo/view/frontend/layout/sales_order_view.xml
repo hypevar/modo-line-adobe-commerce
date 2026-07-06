@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Line_Modo
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="order.actions.container">
+            <block class="Line\Modo\Block\Order\Info\Buttons\RetryPayment"
+                   name="sales.order.info.buttons.line.modo.retry"
+                   cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

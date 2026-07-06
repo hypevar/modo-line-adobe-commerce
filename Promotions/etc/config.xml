@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Line_Promotions
+ *
+ * @author Line https://line.com.ar/
+ * @license OSL-3.0 https://opensource.org/license/osl-3.0.php
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <line_promotions>
+                <enabled>0</enabled>
+                <api_key />
+                <endpoint/>
+                <merchant/>
+                <merchant_id/>
+            </line_promotions>
+        </payment>
+    </default>
+</config>
