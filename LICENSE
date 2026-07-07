@@ -1,0 +1,13 @@
+Open Software License 3.0
+
+SPDX-License-Identifier: OSL-3.0
+
+This project is licensed under the Open Software License 3.0.
+
+The module composer manifests also declare:
+
+    "license": "OSL-3.0"
+
+Reference:
+
+https://opensource.org/licenses/OSL-3.0

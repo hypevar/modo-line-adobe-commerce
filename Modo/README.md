@@ -1,45 +1,77 @@
 # Line_Modo
 
-## Description
+Modulo Magento 2 / Adobe Commerce para incorporar Line Modo como metodo de pago en checkout.
 
-Line allows you to process credit card payments securely and efficiently.
+## Descripcion
 
-## Installation
+`Line_Modo` permite crear solicitudes de pago contra la API de Line, mostrar el checkout embebido de Line Modo, consultar el estado del pago y actualizar la orden segun el resultado recibido.
 
-Use [composer](https://getcomposer.org/) to install Line_Modo.
+El modulo incluye:
 
-```
+- metodo de pago `line_modo`;
+- configuracion de ambientes sandbox y production;
+- credenciales por ambiente;
+- checkout embebido;
+- consulta de estado de pago;
+- procesamiento de webhooks;
+- estados configurables para pago aprobado y rechazado;
+- generacion opcional de factura;
+- notificaciones por email configurables;
+- reintento de pago;
+- personalizacion visual del widget de checkout.
+
+## Instalacion
+
+```bash
 composer require line/module-modo
-```
-
-Then you'll need to activate the module.
-
-```
 bin/magento module:enable Line_Modo
 bin/magento setup:upgrade
+bin/magento setup:di:compile
+bin/magento cache:flush
 ```
 
-## Configuration
+## Configuracion
 
-### Notification status
+Ingresar al administrador de Adobe Commerce:
 
-**No:** No notification will be sent by the module. The standard Adobe Commerce notification flow will handle all
-communications.
-
-**On every transaction:** An email with relevant transfer information will be sent every time a webhook is triggered —
-even multiple times for the same order.
-
-**When total is paid:** A notification will be sent only once, when the order reaches the status configured under
-"Payment has been accepted". It informs that the full payment has been received.
-
-## Uninstall
-
-```
-bin/magento module:uninstall Line_Modo
+```text
+Tiendas > Configuracion > Ventas > Metodos de pago > Line Modo
 ```
 
-If you used Composer for installation Magento will remove the files and database information.
+Configurar:
 
-## License
+- habilitacion del metodo;
+- ambiente;
+- endpoints de API y checkout/frame;
+- public key y secret key;
+- titulo visible en checkout;
+- estados de orden;
+- generacion de factura;
+- paises habilitados;
+- notificaciones;
+- tema visual del checkout embebido.
 
-[OSL-3.0](http://opensource.org/licenses/osl-3.0.php)
+## Webhook
+
+Configurar en Line el endpoint publico:
+
+```text
+https://TU-DOMINIO/line/modo/webhook
+```
+
+El webhook valida la firma recibida mediante `X-Line-Signature`.
+
+## Logs
+
+```text
+var/log/line_modo.log
+```
+
+## Documentacion relacionada
+
+- `../AYUDA.md`
+- `../FUNCIONALIDADES.md`
+
+## Licencia
+
+OSL-3.0

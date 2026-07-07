@@ -29,8 +29,6 @@ define([
             if (allowedOrigins.indexOf(event.origin) === -1) return;
             if (processed) return;
 
-            console.log('[LineModo] postMessage recibido - origin:', event.origin, '- data:', JSON.stringify(event.data));
-
             var response = event.data;
             var status = response && response.status ? response.status : '';
             var type = response && response.type ? response.type : '';
@@ -51,11 +49,11 @@ define([
                     break;
 
                 case 'line-checkout:ready':
-                    // informational: widget loaded — no-op
+                    // informational: widget loaded - no-op
                     break;
 
                 case 'line-checkout:payment-started':
-                    // informational: QR shown, payment not yet scanned — no-op
+                    // informational: QR shown, payment not yet scanned - no-op
                     break;
 
                 case 'REJECTED':
@@ -193,7 +191,7 @@ define([
 
         /**
          * Shows a spinner/message while the payment is being processed.
-         * Does NOT redirect — waits for a follow-up postMessage.
+         * Does NOT redirect - waits for a follow-up postMessage.
          */
         function _handlePending() {
             var $msg = $('#line-modo-status-message');

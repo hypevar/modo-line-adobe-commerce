@@ -75,7 +75,6 @@ class PaymentProcessor implements PaymentProcessorInterface
             $invoice = $this->invoiceService->prepareInvoice($order);
             $invoice->setTransactionId($trxid);
 
-            // region Este bloque esta en duda de la forma
             $invoice->setSubtotal($amount);
             $invoice->setBaseSubtotal($amount);
             $invoice->setSubtotalInclTax($amount);
@@ -85,9 +84,7 @@ class PaymentProcessor implements PaymentProcessorInterface
             $invoice->register();
             $invoice->setState(Invoice::STATE_PAID);
             $order->getPayment()->pay($invoice);
-            // endregion
 
-            // Esto seguro que hay que hacerlo
             $totalPaid = $invoice->getGrandTotal();
             $baseTotalPaid = $invoice->getBaseGrandTotal();
             if (count($invoiceList->getItems()) > 1) {

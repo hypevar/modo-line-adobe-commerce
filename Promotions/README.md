@@ -1,60 +1,82 @@
 # Line_Promotions
 
-## Descripción
+Modulo Magento 2 / Adobe Commerce para consultar promociones activas de Line y exponer codigos `ccCode` al modulo de pago Line Modo.
 
-Line Promotions obtiene los códigos de promoción activos (ccCodes) desde la API de Line y los expone para su uso en el request para generar el QR de pago.
+## Descripcion
 
-## Instalación
+`Line_Promotions` obtiene promociones activas desde la API de Line, extrae codigos `ccCode`, elimina duplicados y los entrega al modulo `Line_Modo` para incluirlos en el request de generacion de pago.
 
-```
+## Instalacion
+
+```bash
 composer require line/module-promotions
-```
-
-Luego activá el módulo.
-
-```
 bin/magento module:enable Line_Promotions
 bin/magento setup:upgrade
 bin/magento setup:di:compile
 bin/magento cache:flush
 ```
 
-## Configuración
+## Configuracion
 
-Navegá a **Tiendas > Configuración > Ventas > Métodos de pago > Line Promotions**.
+Ingresar al administrador de Adobe Commerce:
 
-| Campo           | Descripción |
-|-----------------|---|
-| **Habilitar**   | Habilita o deshabilita el módulo. |
-| **API Key**     | Clave de autenticación para la API de Line. Se almacena encriptada. |
-| **Endpoint**    | URL base de la API de Line. Ejemplo: `https://api.dashboard.line.net.ar` |
-| **Merchant**    | Identificador del marketplace utilizado para construir la URL de la petición a la API. |
-| **Merchant ID** | ID del marketplace utilizado para construir la URL de la petición a la API. |
-
-La URL de la petición a la API se construye de la siguiente forma:
-
+```text
+Tiendas > Configuracion > Ventas > Metodos de pago > Line Promotions
 ```
-{endpoint}/payment/{merchant}/{merchant_id}/status/active
+
+Campos principales:
+
+| Campo | Descripcion |
+| --- | --- |
+| Enable | Habilita o deshabilita el modulo. |
+| API Key | Clave de autenticacion para la API de Line. Se almacena encriptada. |
+| Endpoint | URL base de la API de Line. |
+| Merchant | Identificador del comercio o marketplace. |
+| Merchant ID | Identificador del comercio utilizado en la consulta. |
+
+## Endpoint consultado
+
+La URL de consulta se construye con el siguiente formato:
+
+```text
+{endpoint}/payment/marketplace/{merchant}/{merchant_id}/status/active
 ```
-## Ejemplo de Payload y Respuesta
+
+## Ejemplo de extraccion de codigos
 
 Input:
-``` php [
-     'brands' => [
-         [
-             'options' => [
-                 ['ccCode' => null],
-                 ['ccCode' => '3CSI-6CSI'],
-                 ['ccCode' => '3CSI'],
-             ]
-         ]
-     ]
- ]
- ```
- Output: ```['3CSI','6CSI']```
+
+```php
+[
+    'brands' => [
+        [
+            'options' => [
+                ['ccCode' => null],
+                ['ccCode' => '3CSI-6CSI'],
+                ['ccCode' => '3CSI'],
+            ],
+        ],
+    ],
+]
+```
+
+Output:
+
+```php
+['3CSI', '6CSI']
+```
 
 ## Logs
 
-```
+```text
 var/log/line_promotions.log
 ```
+
+## Documentacion relacionada
+
+- `../AYUDA.md`
+- `../FUNCIONALIDADES.md`
+
+## Licencia
+
+OSL-3.0
