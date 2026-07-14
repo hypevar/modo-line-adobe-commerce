@@ -1,0 +1,23 @@
+{
+    "name": "hypevar/modo-line-adobe-commerce",
+    "description": "Line Modo payment and promotions modules for Adobe Commerce / Magento 2",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "require": {
+        "ext-intl": "*",
+        "php": "~8.3||~8.4||~8.5",
+        "magento/framework": "*",
+        "magento/module-config": "*",
+        "magento/module-payment": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Line\\Modo\\": "Modo/",
+            "Line\\Promotions\\": "Promotions/"
+        },
+        "files": [
+            "Promotions/registration.php",
+            "Modo/registration.php"
+        ]
+    }
+}

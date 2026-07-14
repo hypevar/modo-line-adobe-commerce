@@ -15,18 +15,36 @@ El modulo de promociones agrega la consulta de promociones activas desde Line pa
 
 ## Instalacion rapida
 
-Si los paquetes estan disponibles via Composer:
+Agregar el repositorio en el `composer.json` de la tienda Magento:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/hypevar/modo-line-adobe-commerce.git"
+        }
+    ]
+}
+```
+
+Luego instalar el paquete:
 
 ```bash
-composer require line/module-promotions
-composer require line/module-modo
+composer require hypevar/modo-line-adobe-commerce:dev-main
 bin/magento module:enable Line_Promotions Line_Modo
 bin/magento setup:upgrade
 bin/magento setup:di:compile
 bin/magento cache:flush
 ```
 
-Para instalacion manual, ubicar los modulos en:
+Para una version etiquetada, por ejemplo `v1.0.0`, se puede instalar con una constraint estable:
+
+```bash
+composer require hypevar/modo-line-adobe-commerce:^1.0
+```
+
+Para instalacion manual sin Composer, ubicar los modulos en:
 
 ```text
 app/code/Line/Promotions

@@ -9,7 +9,7 @@ Modulo Magento 2 / Adobe Commerce para consultar promociones activas de Line y e
 ## Instalacion
 
 ```bash
-composer require line/module-promotions
+composer require hypevar/modo-line-adobe-commerce:dev-main
 bin/magento module:enable Line_Promotions
 bin/magento setup:upgrade
 bin/magento setup:di:compile

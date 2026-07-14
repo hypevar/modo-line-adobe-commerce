@@ -26,11 +26,29 @@ Antes de comenzar, verificar que la tienda cuente con:
 
 ### Instalacion via Composer
 
-Si los paquetes estan disponibles en el repositorio Composer configurado para la tienda:
+Agregar el repositorio Git en el `composer.json` de la tienda Magento:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/hypevar/modo-line-adobe-commerce.git"
+        }
+    ]
+}
+```
+
+Luego instalar el paquete:
 
 ```bash
-composer require line/module-promotions
-composer require line/module-modo
+composer require hypevar/modo-line-adobe-commerce:dev-main
+```
+
+Cuando el repositorio tenga un tag de version, por ejemplo `v1.0.0`, se puede instalar con:
+
+```bash
+composer require hypevar/modo-line-adobe-commerce:^1.0
 ```
 
 Luego habilitar los modulos:
@@ -257,4 +275,3 @@ Antes de pasar a produccion:
 - revisar notificaciones por email;
 - deshabilitar `Debug` salvo que se necesite diagnostico temporal;
 - realizar una compra real controlada de bajo monto, si el proceso operativo lo permite.
-

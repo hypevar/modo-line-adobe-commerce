@@ -23,7 +23,7 @@ El modulo incluye:
 ## Instalacion
 
 ```bash
-composer require line/module-modo
+composer require hypevar/modo-line-adobe-commerce:dev-main
 bin/magento module:enable Line_Modo
 bin/magento setup:upgrade
 bin/magento setup:di:compile
